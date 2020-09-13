@@ -31,7 +31,6 @@ const login = credentials => dispatch => {
     axios
     .post('/users/login', credentials)
     .then(response => {
-        // console.log(response)
         token.set(response.data.token)
         dispatch(authActions.loginSuccess(response.data))
     })
@@ -49,11 +48,19 @@ const logout = () => dispatch => {
         token.unset();
         dispatch(authActions.logoutSuccess());
       })
-      .catch(error => console.log(dispatch(authActions.logoutError(error))));
+      .catch(error => dispatch(authActions.logoutError(error)));
   };
 
-const getCurrentUser = () => dispatch => {
+const getCurrentUser = () => (dispatch, getState) => {
+    const {
+        auth: {token: persistedToken} 
+    } = getState()
 
+    if (!persistedToken ){
+        return
+    }
+
+    token.set(persistedToken)
     dispatch(authActions.getCurrentUserRequest())
 
     axios
@@ -71,12 +78,3 @@ export default {
     logout,
     getCurrentUser
 }
-
-
-
-
-
-
-
-// axios.get().catch( error => dispatchEvent((error))
-// axios.then().catch( error => dispatchEvent((error))

@@ -3,7 +3,7 @@ import AppBar from '../AppBar/AppBar'
 
 const styles = {
     container: {
-      width: '500px',
+      width: '800px',
     //   marginLeft: 'auto',
     //   marginRight: 'auto',
       padding: '30px',

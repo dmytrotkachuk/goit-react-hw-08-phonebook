@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
     name: authSelectors.getUserName(state)
 })
 const mapDispatchToProps ={
-    onLogout: authOperations.logout
+    onLogout: authOperations.logout,
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserMenu)
